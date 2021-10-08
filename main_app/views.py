@@ -3,7 +3,9 @@ from django.views.generic.base import TemplateView
 from django.views import View
 from django.http import HttpResponse
 from .models import Cars
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import DetailView
+from django.urls import reverse
 
 # Create your views here.
 class Home(TemplateView):
@@ -29,8 +31,20 @@ class CarsCreate(CreateView):
     model = Cars
     fields = ['make', 'img', 'country']
     template_name = "cars_create.html"
-    success_url = "/cars/"
+    # success_url = "/cars/"
+    # to redirect to cars detail
+    def get_success_url(self):
+        return reverse('cars_detail', kwargs={'pk': self.object.pk})
 
-class CarsDetail(DeleteView):
+class CarsDetail(DetailView):
     model = Cars
     template_name = "cars_detail.html"
+
+class CarsUpdate(UpdateView):
+    model = Cars
+    fields = ['make', 'img', 'country']
+    template_name = "cars_update.html"
+    # success_url = "/cars/"
+    # to redirect to cars detail
+    def get_success_url(self):
+        return reverse('cars_detail', kwargs={'pk': self.object.pk})
