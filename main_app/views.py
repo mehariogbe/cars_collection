@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from django.views import View
 from django.http import HttpResponse
 from .models import Cars
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
 
@@ -48,3 +48,8 @@ class CarsUpdate(UpdateView):
     # to redirect to cars detail
     def get_success_url(self):
         return reverse('cars_detail', kwargs={'pk': self.object.pk})
+
+class CarsDelete(DeleteView):
+    model = Cars
+    template_name = "cars_delete_confirm.html"
+    success_url = "/cars/"

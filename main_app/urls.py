@@ -8,6 +8,7 @@ urlpatterns = [
    path('cars/new', views.CarsCreate.as_view(), name="cars_create"),
    path('cars/<int:pk>/', views.CarsDetail.as_view(), name="cars_detail"),
    path('cars/<int:pk>/update', views.CarsUpdate.as_view(), name="cars_update"),
+   path('cars/<int:pk>/delete', views.CarsDelete.as_view(), name="cars_delete"),
 
    
 ]
