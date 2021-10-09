@@ -24,3 +24,10 @@ class Model(models.Model):
 
     def __str__(self):
         return self.type
+
+class Favorite(models.Model):
+    person = models.CharField(max_length=50)
+    models = models.ManyToManyField(Model)
+
+    def __str__(self):
+        return self.person        

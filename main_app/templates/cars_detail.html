@@ -59,7 +59,6 @@
             </div>
           </form>
       
-        
         {% for model in cars.models.all %}
         <div class="card">
             <div class="card-image">
@@ -71,6 +70,35 @@
           <span>{{forloop.counter}}</span>
           <span><b>Model {{model.type}}</b></span>
           <span> Year {{model.year}}</span>
+ <!-- Favorite Drop Down -->
+          <span>
+            <div class="dropdown">
+              <div class="dropdown-trigger">
+                <button
+                  class="button"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu"
+                >
+                  <span>Add to Favorites</span>
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  {% for favorite in favorites %}
+               
+                  <a
+                    href="{% url 'favorite_model_assoc' favorite.pk model.pk %}?assoc=add"
+                    class="dropdown-item">
+                    {{favorite.person}}
+                  </a>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </span>
         </div>
             {% empty %}
         <article class="message">
@@ -81,12 +109,14 @@
     
         {% endfor %}
       </div>
+    
 </div>
 
     <div class="detail__country">
         <h4 class="title is-4">Country</h4>
         <h5>{{cars.country}}</h5>
     </div>
+  
 </div>
 
 {% endblock %}

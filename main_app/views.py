@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.views.generic.base import TemplateView
 from django.views import View
 from django.http import HttpResponse
-from .models import Cars, Model
+from .models import Cars, Model, Favorite
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
@@ -11,6 +11,14 @@ from django.urls import reverse
 # Create your views here.
 class Home(TemplateView):
     template_name = "home.html"
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["favorites"] = Favorite.objects.all()
+    #     return context
+
+
+
 
 # Views for Cars
 class CarsList(TemplateView):
@@ -41,6 +49,13 @@ class CarsDetail(DetailView):
     model = Cars
     template_name = "cars_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["favorites"] = Favorite.objects.all()
+        return context
+
+
+
 class CarsUpdate(UpdateView):
     model = Cars
     fields = ['make', 'img', 'country']
@@ -64,4 +79,21 @@ class ModelCreate(View):
         cars = Cars.objects.get(pk=pk)
         Model.objects.create(type=type, img=img, year=year, cars=cars)
         return redirect('cars_detail', pk=pk)
-         
+
+# views for Favorite
+class Fav(TemplateView):
+    template_name = "favorite.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["favorites"] = Favorite.objects.all()
+        return context
+
+class FavoriteModelAssoc(View):
+    def get(self, request, pk, model_pk):
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            Favorite.objects.get(pk=pk).models.remove(model_pk)
+        if assoc == "add":
+            Favorite.objects.get(pk=pk).models.add(model_pk)
+        return redirect('favorite')        

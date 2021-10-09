@@ -14,8 +14,23 @@
               <div class="model">
                 <span>{{forloop.counter}}</span>
                 <span><b>{{model.type}}</b></span>
-                <span>{{model.img}}</span>
+                <div class="card-image">
+                  <figure class="image is-square">
+                    <img src="{{model.img}}" alt="{{model.type}}" />
+                  </figure>
+                </div>
                 <span>{{model.year}}</span>
+
+                <span>
+                <a
+                  href="{% url 'favorite_model_assoc' favorite.pk model.pk %}?assoc=remove"
+                  class="button is-danger is-outlined">
+                  <span class="icon is-small">
+                    <i class="fas fa-times"></i>
+                  </span>
+                </a>
+                
+                </span>
               </div>
   
           {% endfor %}
