@@ -24,6 +24,12 @@ body {
     justify-content: center;
     gap: 30px;
   }
+  /* .model-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    justify-content: center;
+    gap: 30px;
+  } */
   
   .gallery .card {
     transition: .1s linear;
@@ -73,5 +79,24 @@ body {
 
   .detail__container {
     margin-top: 500px;
+  }
+
+  .detail__cars {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .model {
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 0.1fr 3fr 1fr;
+    border-radius: 5px;
+  }
+  
+  .model:hover {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    cursor: pointer;
   }
 

@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
 
+
 # Create your views here.
 class Home(TemplateView):
     template_name = "home.html"

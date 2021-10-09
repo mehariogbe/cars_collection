@@ -19,6 +19,33 @@
         </span>
       </a>
     </div>
+    <div class="gallery">
+    <div class="detail__cars mb-5">
+        <h3 class="title is-3">Models</h3>
+    
+        {% for model in cars.models.all %}
+        <div class="card">
+            <div class="card-image">
+              <figure class="image is-square">
+                <img src="{{model.img}}" alt="{{model.type}}" />
+              </figure>
+            </div>  
+        <div class="model">
+          <span>{{forloop.counter}}</span>
+          <span><b>Model {{model.type}}</b></span>
+          <span> Year {{model.year}}</span>
+        </div>
+            {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <p>No Models Available</p>
+          </div>
+        </article>
+    
+        {% endfor %}
+      </div>
+</div>
+
     <div class="detail__country">
         <h4 class="title is-4">Country</h4>
         <h5>{{cars.country}}</h5>
