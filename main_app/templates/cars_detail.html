@@ -22,7 +22,44 @@
     <div class="gallery">
     <div class="detail__cars mb-5">
         <h3 class="title is-3">Models</h3>
-    
+        <!-- Model Create -->
+        <form class="mb-5" action="{% url 'model_create' cars.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  name="type"
+                  placeholder="Model Type"
+                  required
+                />
+              </div>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  name="img"
+                  placeholder="Image"
+                  required
+                /> 
+               </div>
+               <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  name="year"
+                  placeholder="Model Year"
+                  required
+                /> 
+               </div>
+              <div class="control">
+                <input class="button is-primary" type="submit" value="Add Car Model" />
+              </div>
+            </div>
+          </form>
+      
+        
         {% for model in cars.models.all %}
         <div class="card">
             <div class="card-image">

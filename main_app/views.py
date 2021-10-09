@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic.base import TemplateView
 from django.views import View
 from django.http import HttpResponse
-from .models import Cars
+from .models import Cars, Model
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.urls import reverse
@@ -12,7 +12,7 @@ from django.urls import reverse
 class Home(TemplateView):
     template_name = "home.html"
 
-# Views for Make
+# Views for Cars
 class CarsList(TemplateView):
     template_name = "cars_list.html"
 
@@ -54,3 +54,14 @@ class CarsDelete(DeleteView):
     model = Cars
     template_name = "cars_delete_confirm.html"
     success_url = "/cars/"
+     
+# views for Model
+class ModelCreate(View):
+    def post(self, request, pk):
+        type = request.POST.get("type")
+        img = request.POST.get("img")
+        year = request.POST.get("year")
+        cars = Cars.objects.get(pk=pk)
+        Model.objects.create(type=type, img=img, year=year, cars=cars)
+        return redirect('cars_detail', pk=pk)
+         

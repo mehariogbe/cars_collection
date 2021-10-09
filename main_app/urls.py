@@ -9,6 +9,8 @@ urlpatterns = [
    path('cars/<int:pk>/', views.CarsDetail.as_view(), name="cars_detail"),
    path('cars/<int:pk>/update', views.CarsUpdate.as_view(), name="cars_update"),
    path('cars/<int:pk>/delete', views.CarsDelete.as_view(), name="cars_delete"),
-
+#  Models url
+   path('cars/<int:pk>/models/new/', views.ModelCreate.as_view(), name="model_create"),
+   
    
 ]
