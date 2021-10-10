@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import  redirect, render
 from django.views.generic.base import TemplateView
 from django.views import View
 from django.http import HttpResponse
@@ -29,9 +29,10 @@ class CarsList(TemplateView):
         # query for search button
         make =self.request.GET.get("make")
         if make != None:
-            context["carss"] = Cars.objects.filter(make__icontains=make)
+            context["carss"] = Cars.objects.filter(make__icontains=make, user=self.request.user)
+            context["header"] = f"Searching for {make}"
         else:    
-            context["carss"] = Cars.objects.all()
+            context["carss"] = Cars.objects.filter(user=self.request.user)
             # default header
             context["header"] = "Cars Make"
         return context
@@ -42,7 +43,13 @@ class CarsCreate(CreateView):
     template_name = "cars_create.html"
     # success_url = "/cars/"
     # to redirect to cars detail
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CarsCreate, self).form_valid(form)
+
     def get_success_url(self):
+        print(self.kwargs)
         return reverse('cars_detail', kwargs={'pk': self.object.pk})
 
 class CarsDetail(DetailView):

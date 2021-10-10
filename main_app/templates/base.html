@@ -26,9 +26,18 @@
                 <span aria-hidden="true"></span>
             </a>
         </div>
+        {% if user.is_authenticated %}
         <div class="navbar-menu navbar-end">
+            <span class="navbar-item">Welcome: {{user.username}}</span>
             <a class="navbar-item" href="/cars">Cars</a>
+            <a class="navbar-item" href="/cars/favorite">Favorites</a>
+            <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
         </div>
+        {% else %}
+        <div class="navbar-menu navbar-end">
+            <a class="navbar-item" href="{% url 'login' %}">Log In</a>
+        </div>
+        {% endif %}
     </nav>
     <div class="container">
 

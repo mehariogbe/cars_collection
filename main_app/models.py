@@ -12,9 +12,14 @@ class Cars(models.Model):
     # country = CountryField(blank_label='(select country)')
     country = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
+    # User auth
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.make
+
+    class Meta:
+        ordering = ['make']    
 
 class Model(models.Model):
     type = models.CharField(max_length=50)
