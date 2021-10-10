@@ -2,26 +2,12 @@
 {% block content %}
 <h1>Cars Collection</h1>
 
-<div class="favorite">
-    {% for favorite in favorites %}
-  
-        <div class="favorite mb-5">
-          <h3 class="title is-3 has-text-success">{{favorite.person}}</h3>
-          <hr />
-  
-          {% for model in favorite.models.all %}
-  
-              <div class="model">
-                <span>{{forloop.counter}}</span>
-                <span><b>{{model.type}}</b></span>
-                <span>{{model.img}}</span>
-                <span>{{model.year}}</span>
-              </div>
-  
-          {% endfor %}
-        </div>
-  
-    {% endfor %}
-  </div>
-  
+<h4> An App where You can add a Car brand and A car Model as your favourites!</h4>
+<h3>How to Use</h3>
+<ol>
+  <li>Sign Up fpr The App!</li>
+  <li>Add a Car Brand that you like.</li>
+  <li>Add different Models of that Car Brand.</li>
+  <li>You can also add your favorite cars to a list.</li>
+</ol>
 {% endblock %}
